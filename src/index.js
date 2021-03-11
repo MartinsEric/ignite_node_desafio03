@@ -23,6 +23,8 @@ app.post("/repositories", (request, response) => {
     likes: 0
   };
 
+  repositories.push(repository)
+
   return response.status(201).json(repository);
 });
 
@@ -48,7 +50,7 @@ app.delete("/repositories/:id", (request, response) => {
 
   repositoryIndex = repositories.findIndex(repository => repository.id === id);
 
-  if (repositoryIndex > 0) {
+  if (repositoryIndex < 0) {
     return response.status(404).json({ error: "Repository not found" });
   }
 
